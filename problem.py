@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import random
 import datetime
+import random
+
 from DatetimeEventStore import DatetimeEventStore
 
 store = DatetimeEventStore()

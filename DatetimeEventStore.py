@@ -16,9 +16,11 @@ class DatetimeEventStore:
             print(e)
 
     def __del__(self):
+        """ close connection"""
         self.conn.close()
 
     def store_event(self, at, data):
+        """ Insert a Event """
         try:
             c = self.conn.cursor()
             sqlite_insert_with_param = """INSERT INTO EVENTS(Name, Date) VALUES (?, ?);"""
@@ -29,6 +31,7 @@ class DatetimeEventStore:
             print("Failed to insert", error)
 
     def get_events(self, start, end):
+        """ get events """
         strStart = start.strftime("%Y-%m-%d")
         strEnd = end.strftime("%Y-%m-%d")
         c = self.conn.cursor()
@@ -40,6 +43,7 @@ class DatetimeEventStore:
         return rows
 
     def truncate(self):
+        """ truncate the table"""
         c = self.conn.cursor()
         sqlite_truncate = '''DELETE FROM EVENTS;'''
         c.execute(sqlite_truncate)
