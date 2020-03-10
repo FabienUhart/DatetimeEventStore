@@ -27,3 +27,4 @@ DatetimeEventStore
 	        self.conn.commit()
 	
 	Utilisation de logs dans le package en tant que parametres
+	Générer des tests avec pytest pour une méthodologie de TDD
