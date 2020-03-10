@@ -32,19 +32,10 @@ class DatetimeEventStore:
 
     def get_events(self, start, end):
         """ get events """
-        strStart = start.strftime("%Y-%m-%d")
-        strEnd = end.strftime("%Y-%m-%d")
         c = self.conn.cursor()
         sqlite_events_between = """SELECT NAME, DATE from EVENTS WHERE Date BETWEEN ? and ?;"""
-        data_tuple = (strStart, strEnd)
+        data_tuple = (start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
         c.execute(sqlite_events_between, data_tuple)
         rows = c.fetchall()
         self.conn.commit()
         return rows
-
-    def truncate(self):
-        """ truncate the table"""
-        c = self.conn.cursor()
-        sqlite_truncate = '''DELETE FROM EVENTS;'''
-        c.execute(sqlite_truncate)
-        self.conn.commit()
